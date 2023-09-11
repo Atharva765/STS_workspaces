@@ -6,11 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Double"/>
+		<item key="selection" value="studentId"/>
 		<list key="findhistory">
+			<item value="studentid"/>
 			<item value="BigDecimal"/>
 		</list>
 		<list key="replacehistory">
+			<item value="studentId"/>
 			<item value="Double"/>
 			<item value="double"/>
 		</list>
