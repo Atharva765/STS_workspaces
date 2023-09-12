@@ -39,14 +39,12 @@ public class StudentController {
 	private StudentService studentService;
 	 
 	 
-	 @Autowired
-	 private StudentRepository studentRepository;
-	
-	 
-	 @PostMapping("/create-multiple")
-	 public List<Student> createStudents(@RequestBody List<Student> students) {
-		 return studentRepository.saveAll(students);
-	 }
+//	 @Autowired
+//	 private StudentRepository studentRepository;
+//	 @PostMapping("/create-multiple")
+//	 public List<Student> createStudents(@RequestBody List<Student> students) {
+//		 return studentRepository.saveAll(students);
+//	 }
 	
 	@GetMapping(value = "/getAllStudent")
 	public ResponseEntity<List<Student>> getAllStudents(){

@@ -3,32 +3,27 @@ package com.example.demo.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import com.example.demo.model.AddStudentException;
 import com.example.demo.model.NoSuchStudentException;
 import com.example.demo.model.Response;
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
-import com.example.demo.service.StudentService;
 import com.example.demo.serviceImpl.StudentServiceImpl;
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 
 @SpringBootTest
 public class StudentServiceTest {
@@ -129,18 +124,27 @@ public class StudentServiceTest {
 		
 		when(studentRepository.findById(1)).thenReturn(Optional.empty());
 		
-		NoSuchStudentException ex = assertThrows(NoSuchStudentException.class, ()->{
-			studentService.changeFName(studentId, exStudent);
-		});
+		NoSuchStudentException ex = assertThrows(NoSuchStudentException.class, ()->
+			studentService.changeFName(studentId, exStudent)
+		);
 		
+		NoSuchStudentException ex2 = assertThrows(NoSuchStudentException.class, ()->
+			studentService.getStudentById(studentId)
+		);
 		
+		NoSuchStudentException ex3 = assertThrows(NoSuchStudentException.class, ()->
+			studentService.deleteStudent(studentId)
+		);
 		
 		assertEquals("No Student present with ID= "+ studentId, ex.getMessage());
 		assertEquals(HttpStatus.NOT_FOUND, ex.getNotFound());
 		
 	}
 	
-	@Test
+
+	
+	
+@Test
 	public void testGetAllStudent() {
 		
 		
